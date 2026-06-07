@@ -19,13 +19,10 @@ async function getTopNotifications() {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     });
-
     if (!response.ok) {
       throw new Error(`HTTP Error: ${response.status}`);
     }
-
     const data = await response.json();
-
     const notifications = data.notifications || [];
 
     const top10 = notifications
