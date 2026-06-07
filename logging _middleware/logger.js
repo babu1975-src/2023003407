@@ -8,25 +8,23 @@ export async function Log(stack, level, packageName, message) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           stack,
           level,
           package: packageName,
-          message
-        })
+          message,
+        }),
       }
     );
+
+    if (!response.ok) {
+      throw new Error("Failed to create log");
+    }
 
     return await response.json();
   } catch (error) {
     console.error(error);
   }
 }
-Log(
-  "frontend",
-  "info",
-  "component",
-  "Testing logger"
-);
