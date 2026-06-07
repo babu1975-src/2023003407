@@ -1,18 +1,26 @@
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
+export async function Log(stack, level, packageName, message) {
+  const token = "YOUR_ACCESS_TOKEN";
 
-fetch("http://4.224.186.213/evaluation-service/logs", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`
-  },
-  body: JSON.stringify({
-    stack: "frontend",
-    level: "info",
-    package: "component",
-    message: "Testing logger"
-  })
-})
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error("Error:", error));
+  try {
+    const response = await fetch(
+      "http://4.224.186.213/evaluation-service/logs",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          stack,
+          level,
+          package: packageName,
+          message
+        })
+      }
+    );
+
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
