@@ -1,5 +1,5 @@
 export async function Log(stack, level, packageName, message) {
-  const token = "YOUR_ACCESS_TOKEN";
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
 
   try {
     const response = await fetch(
